@@ -1,8 +1,10 @@
 # Pzy3d - 3d charts for Python
 
-Build [Jzy3d](http://www.jzy3d.org) chart from Python.
+Build [Jzy3d](http://www.jzy3d.org) charts for Python.
 
-2 binding are provided: Jython and Py4j
+Jzy3d is a java library, hence calling it from Python might be done by several manners :
+* Py4j binding : python initialize a Java Virtual Machine acting like a server. Python scripts then exchange informations with this server. See ```src/main/python/py4j-*.py```
+* Jython : your python program is interpreted inside a JVM. Your program can use Java objects. See ```src/main/jython/jython-*.py```
 
 ## Using Py4j
 
