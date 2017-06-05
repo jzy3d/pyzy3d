@@ -24,5 +24,6 @@ for i in range(0, size):
 scatter = Scatter(points, colors)
 chart = AWTChartComponentFactory.chart(Quality.Advanced, "newt")
 chart.getScene().add(scatter)
+chart.addMouseCameraController()
 chart.open("Pzy3d - scatter", 800,600)
 chart.render()

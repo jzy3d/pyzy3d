@@ -35,5 +35,6 @@ surface.setWireframeDisplayed(False)
 # Create a chart
 chart = AWTChartComponentFactory.chart(Quality.Advanced, "awt")
 chart.getScene().getGraph().add(surface)
+chart.addMouseCameraController();
 chart.open("Pzy3d - surface", 800, 600)
 chart.render()
