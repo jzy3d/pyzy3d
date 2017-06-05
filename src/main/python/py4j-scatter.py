@@ -1,7 +1,5 @@
 import logging
 
-#logging.setConsoleLevel(logging.ERROR)
-
 # ############################################
 # Start Pzy3d gateway
 
@@ -24,6 +22,7 @@ if autoStart:
         import time
         time.sleep(sleepTime)
 
+
 # ############################################
 # Connect to Pzy3d gateway
 
@@ -32,14 +31,17 @@ print("Joining Pzy3d gateway ...")
 gateway = JavaGateway()
 print("Pzy3d gateway joined")
 
+
 # ############################################
-# Generate data
+# Generate data from python, and store in java memory
 
 import random
 
 size = 10000
+ratio = 1000
+
 coords = gateway.jvm.org.jzy3d.maths.Coord3ds(size)
-ratio  =1000
+
 for i in range(0,size):
     r = random.random()
     g = random.random()
@@ -50,16 +52,21 @@ for i in range(0,size):
     z = b * ratio
 
     a = 0.25
+
     coords.set(i, x, y, z, r, g, b, a)
+
 
 # ############################################
 # Create scatter
-# gateway.entry_point.console(coords)
+
 scatter = gateway.entry_point.scatter(coords)
 scatter.setWidth(5.0)
+# gateway.entry_point.console(coords)
+
 
 # ############################################
 # Configure and open chart
+
 chart = gateway.entry_point.getChart()
 chart.getQuality().setSmoothPoint(True)
 gateway.entry_point.open("Pzy3d - Py4j - Scatter", 800, 600)
