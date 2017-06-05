@@ -25,7 +25,7 @@ public class Pzy3d {
     }
 
     public Pzy3d(){
-       chart = AWTChartComponentFactory.chart(quality);
+       chart = AWTChartComponentFactory.chart(quality, "newt");
        chart.addMouseCameraController();
     }
     
@@ -39,12 +39,16 @@ public class Pzy3d {
         return chart.open(title, width, height);
     }
     
+    public void clear(){
+        chart.clear();
+    }
+    
     /* PRIMITIVES */
     
     public Scatter scatter(Coord3ds coords){
         Scatter scatter = new Scatter(coords.coordsArray(), coords.colorsArray());
-        scatter.setColor(Color.BLACK);
-        chart.add(scatter);
+        //scatter.setColor(Color.BLACK);
+        chart.getScene().add(scatter);
         return scatter;
     }
     
