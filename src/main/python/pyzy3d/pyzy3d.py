@@ -30,6 +30,12 @@ class Pyzy3d(object):
         # Connect gateway
         self.gateway_client = self.gateway_connect()
 
+    def shutdown(self):
+        self.gateway_client.shutdown_callback_server()
+        self.gateway_client.shutdown()
+    def shutdown_callback_server(self):
+        self.gateway_client.shutdown_callback_server()
+
     '''
     Initialiaze or retrieve a chart identified by an integer ID.
     '''

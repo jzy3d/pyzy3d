@@ -16,7 +16,10 @@ scatter.setWidth(5.0)
 
 
 # Chart
-chart = pz.chart(0)
+chart = pz.chart(1)
 chart.getQuality().setSmoothPoint(True);
 chart.add(scatter)
 chart.open("Pyzy3d - Scatter", 800, 600)
+
+
+pz.shutdown()

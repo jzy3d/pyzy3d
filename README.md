@@ -146,6 +146,11 @@ Now deploy to test
 twine upload dist/* -r testpypi
 ```
 
+# TODO
+
+* shutdown callback server when caller as finished processing
+* detect if gateway is up or no to guess if it should be started
+* flag to state if it should remain up + how to reconnect to callback server
 
 
 # Help
