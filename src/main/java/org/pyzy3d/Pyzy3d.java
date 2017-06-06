@@ -5,8 +5,15 @@ import java.util.Map;
 import org.jzy3d.bridge.IFrame;
 import org.jzy3d.chart.Chart;
 import org.jzy3d.chart.factories.AWTChartComponentFactory;
+import org.jzy3d.colors.Color;
+import org.jzy3d.colors.ColorMapper;
+import org.jzy3d.colors.colormaps.ColorMapRainbow;
 import org.jzy3d.maths.Coord3ds;
+import org.jzy3d.maths.Range;
+import org.jzy3d.plot3d.builder.Builder;
+import org.jzy3d.plot3d.builder.concrete.OrthonormalGrid;
 import org.jzy3d.plot3d.primitives.Scatter;
+import org.jzy3d.plot3d.primitives.Shape;
 import org.jzy3d.plot3d.rendering.canvas.Quality;
 
 import py4j.GatewayServer;
@@ -81,6 +88,17 @@ public class Pyzy3d {
         Chart chart = AWTChartComponentFactory.chart(quality, "newt");
         chart.addMouseCameraController();
         return chart;
+    }
+
+    /** Create the object to represent the function over the given range.
+     */
+    public Shape newSurface(PyFunc3d pyFunction, float xmin, float xmax, float ymin, float ymax, int steps){
+        PyMapper mapper = new PyMapper(pyFunction);
+        final Shape surface = Builder.buildOrthonormal(new OrthonormalGrid(new Range(xmin, xmax), steps, new Range(ymin, ymax), steps), mapper);
+        surface.setColorMapper(new ColorMapper(new ColorMapRainbow(), surface.getBounds().getZmin(), surface.getBounds().getZmax(), new Color(1, 1, 1, .5f)));
+        surface.setFaceDisplayed(true);
+        surface.setWireframeDisplayed(false);
+        return surface;
     }
 
     

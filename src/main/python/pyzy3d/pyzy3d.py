@@ -1,5 +1,8 @@
 from py4j.java_gateway import JavaGateway
 import time
+import os
+
+DEFAULT_JAR = os.path.dirname(os.path.abspath(__file__)) + '/bin/pyzy3d-1.0.1-SNAPSHOT.jar'
 
 '''
 Chart controller.
@@ -10,7 +13,7 @@ class Pyzy3d(object):
 
     Might join an already started Pyzy3d Java Gateway (call Pyzy3d(False)).
     '''
-    def __init__(self, startGateway=True, pzyJar = 'bin/pyzy3d-1.0.1-SNAPSHOT.jar'):
+    def __init__(self, startGateway=True, pzyJar = DEFAULT_JAR):
         # TRYING connecting on gateway
         #try:
         #self.gateway_client = self.gateway_connect()
@@ -42,6 +45,8 @@ class Pyzy3d(object):
     def new_scatter(self, coords):
         return self.gateway_client.entry_point.newScatter(coords)
 
+    def new_surface(self, mapper, xmin=-1, xmax=+1, ymin=-1, ymax=+1, steps=100):
+        return self.gateway_client.entry_point.newSurface(mapper, xmin, xmax, ymin, ymax, steps)
 
 
     def gateway_start(self, pzyJar = 'bin/pyzy3d-1.0.1-SNAPSHOT.jar', showJavaOut = False):

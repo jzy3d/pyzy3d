@@ -2,6 +2,8 @@
 .project
 .settings/
 
+src/main/python/pyzy3d/bin/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
