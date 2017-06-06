@@ -2,11 +2,11 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.jzy3d</groupId>
-	<artifactId>pzy3d-api</artifactId>
+	<artifactId>pyzy3d</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
-	<name>Pzy3d API</name>
+	<name>Pyzy3d</name>
 
-	<description>Python binding for 3d charts</description>
+	<description>3d charts for Python and Jython</description>
 
 	<dependencies>
 		<dependency>
@@ -71,7 +71,7 @@
 								<transformers>
 									<transformer
 										implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-										<mainClass>org.pzy3d.Pzy3d</mainClass>
+										<mainClass>org.pyzy3d.Pyzy3d</mainClass>
 									</transformer>
 								</transformers>
 	      			</configuration>

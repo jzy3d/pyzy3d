@@ -62,3 +62,9 @@ Py4j requires gateway to be started with ```java -jar bin/pzy3d-api-1.0.1-SNAPSH
 
 ### Using Pzy3d with Jython
 Jython requires path to be defined as follow ```jython -Dpython.path=bin/pzy3d-api-1.0.1-SNAPSHOT.jar src/main/jython/jython-surface.py```
+
+
+## Note for Python distrib
+
+* https://python-packaging.readthedocs.io/en/latest/
+* https://github.com/urbanairship/mvn-python-packaging/blob/master/pom.xml

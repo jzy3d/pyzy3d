@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.jzy3d</groupId>
-  <artifactId>pzy3d-api</artifactId>
-  <name>Pzy3d API</name>
+  <artifactId>pyzy3d</artifactId>
+  <name>Pyzy3d</name>
   <version>1.0.1-SNAPSHOT</version>
-  <description>Python binding for 3d charts</description>
+  <description>3d charts for Python and Jython</description>
   <build>
     <plugins>
       <plugin>
@@ -38,7 +38,7 @@
               </artifactSet>
               <transformers>
                 <transformer>
-                  <mainClass>org.pzy3d.Pzy3d</mainClass>
+                  <mainClass>org.pyzy3d.Pyzy3d</mainClass>
                 </transformer>
               </transformers>
             </configuration>

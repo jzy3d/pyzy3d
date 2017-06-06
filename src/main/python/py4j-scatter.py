@@ -27,9 +27,9 @@ if autoStart:
 # Connect to Pzy3d gateway
 
 from py4j.java_gateway import JavaGateway
-print("Joining Pzy3d gateway ...")
+print("Joining Pyzy3d gateway ...")
 gateway = JavaGateway()
-print("Pzy3d gateway joined")
+print("Pyzy3d gateway joined")
 
 
 # ############################################
@@ -69,11 +69,11 @@ scatter.setWidth(5.0)
 
 chart = gateway.entry_point.getChart()
 chart.getQuality().setSmoothPoint(True)
-gateway.entry_point.open("Pzy3d - Py4j - Scatter", 800, 600)
+gateway.entry_point.open("Pyzy3d - Py4j - Scatter", 800, 600)
 
 
 # ############################################
 # Info
 
-print("Pzy3d Gateway PID : ")
+print("Pyzy3d Gateway PID : ")
 print(pid)
