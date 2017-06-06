@@ -1,8 +1,10 @@
 package org.pyzy3d;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.jzy3d.bridge.IFrame;
 import org.jzy3d.chart.Chart;
 import org.jzy3d.chart.factories.AWTChartComponentFactory;
-import org.jzy3d.colors.Color;
 import org.jzy3d.maths.Coord3ds;
 import org.jzy3d.plot3d.primitives.Scatter;
 import org.jzy3d.plot3d.rendering.canvas.Quality;
@@ -17,6 +19,7 @@ import py4j.GatewayServer;
 public class Pyzy3d {
     protected Quality quality = Quality.Advanced;
     protected Chart chart;
+    protected Map<Integer,Chart> charts = new HashMap<Integer,Chart>();
 
     public static void main(String[] args) {
         GatewayServer gatewayServer = new GatewayServer(new Pyzy3d());
@@ -34,6 +37,17 @@ public class Pyzy3d {
     public Chart getChart() {
         return chart;
     }
+
+    public Chart getOrCreateChart(int id) {
+        Chart chart = charts.get(id);
+        if(chart==null){
+            chart = newChart(Quality.Advanced);
+            charts.put(id, chart);
+        }
+        return chart;
+    }
+    
+
     
     public IFrame open(String title, int width, int height){
         return chart.open(title, width, height);
@@ -51,6 +65,24 @@ public class Pyzy3d {
         chart.getScene().add(scatter);
         return scatter;
     }
+    
+    public Scatter newScatter(Coord3ds coords){
+        Scatter scatter = new Scatter(coords.coordsArray(), coords.colorsArray());
+        return scatter;
+    }
+
+    /**
+     * Initialize a chart. Chart is not registered in Pyzy3d list of managed charts
+     * 
+     * @param quality
+     * @return
+     */
+    public Chart newChart(Quality quality){
+        Chart chart = AWTChartComponentFactory.chart(quality, "newt");
+        chart.addMouseCameraController();
+        return chart;
+    }
+
     
     /**
      * Print coordinates in console for debugging
