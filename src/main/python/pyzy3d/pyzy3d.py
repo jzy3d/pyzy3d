@@ -12,17 +12,23 @@ class Pyzy3d(object):
     Start and connect to a Pyzy3d Java Gateway.
 
     Might join an already started Pyzy3d Java Gateway (call Pyzy3d(False)).
+
+    You might have to kill the gateway process.
     '''
     def __init__(self, startGateway=True, pzyJar = DEFAULT_JAR):
         # TRYING connecting on gateway
+        #test = None
         #try:
-        #self.gateway_client = self.gateway_connect()
+        #    self.gateway_client = self.gateway_connect()
+        #    test = self.chart(0)
         #except Exception:
-        #  pass
+            #self.shutdown()
+        #    pass
 
+        #print(test)
 
         # Start gateway
-        if startGateway:#self.gateway_client.is_connected is False:#startGateway:
+        if startGateway:#test == None: ##self.gateway_client.is_connected is False:#startGateway:
             self.gateway_process = self.gateway_start(pzyJar)
             sleepTime = 4
             time.sleep(sleepTime)
@@ -55,14 +61,10 @@ class Pyzy3d(object):
         return self.gateway_client.entry_point.newSurface(mapper, xmin, xmax, ymin, ymax, steps)
 
 
-    def gateway_start(self, pzyJar = 'bin/pyzy3d-1.0.1-SNAPSHOT.jar', showJavaOut = False):
-
-
-
-        pid = 0
-
+    def gateway_start(self, pzyJar = DEFAULT_JAR, showJavaOut = False):
         import subprocess as sub
         print("Will start Pyzy3d Gateway : " + pzyJar)
+        pid = 0
         pid = sub.Popen(['java', '-jar', pzyJar], stdout=sub.PIPE,stderr=sub.PIPE)
         print("Pyzy3d gateway invoked : " + pzyJar)
 
@@ -70,7 +72,6 @@ class Pyzy3d(object):
             output, errors = p.communicate()
             print(output)
         return pid
-
 
     def gateway_connect(self):
         print("Joining Pyzy3d gateway ...")
