@@ -2,10 +2,10 @@ from pyzy3d import Pyzy3d
 from generator import Generator
 
 # A Pyzy instance
-pz = Pyzy3d()#True, 'target/pyzy3d-1.0.1-SNAPSHOT.jar')
+pz = Pyzy3d()#False, 'target/pyzy3d-1.0.1-SNAPSHOT.jar')
 
 # Generate data
-n = 10000
+n = 30000
 coords = pz.new_coords(n)
 Generator().scatter(coords, n)
 

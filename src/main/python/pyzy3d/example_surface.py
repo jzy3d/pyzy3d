@@ -15,7 +15,6 @@ chart = pz.chart(0)
 chart.getQuality().setSmoothPoint(True)
 chart.add(surface)
 chart.open("Pyzy3d - Surface", 800, 600)
-
 time.sleep(5)
 chart.render()
 

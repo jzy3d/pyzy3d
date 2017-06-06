@@ -40,6 +40,8 @@ chart = pz.chart(0)
 chart.getQuality().setSmoothPoint(True);
 chart.add(scatter)
 chart.open("Pyzy3d - Scatter", 800, 600)
+
+pz.shutdown()
 ```
 
 Will output

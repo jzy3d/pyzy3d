@@ -51,20 +51,20 @@ class Pyzy3d(object):
     '''
     Instanciate a Java Coord3ds that can be edited from Python.
     '''
-    def new_coords(self):
+    def new_coords(self, size=4):
         return self.gateway_client.jvm.org.jzy3d.maths.Coord3ds(size)
 
     '''
     Instanciate a Java Coord3d that can be edited from Python.
     '''
-    def new_coord(self):
-        return self.gateway_client.jvm.org.jzy3d.maths.Coord3d()
+    def new_coord(self, x=0.0, y=0.0, z=0.0):
+        return self.gateway_client.jvm.org.jzy3d.maths.Coord3d(x,y,z)
 
     '''
     Instanciate a Java Color that can be edited from Python.
     '''
-    def new_color(self):
-        return self.gateway_client.jvm.org.jzy3d.colors.Color()
+    def new_color(self, r=0.0, g=0.0, b=0.0, a=1.0):
+        return self.gateway_client.jvm.org.jzy3d.colors.Color(r, g, b, a)
 
     '''
     Instanciate a Java Point that can be edited from Python.
@@ -108,6 +108,17 @@ class Pyzy3d(object):
     def new_surface(self, mapper, xmin=-1.0, xmax=+1.0, ymin=-1.0, ymax=+1.0, steps=100):
         return self.gateway_client.entry_point.newSurface(mapper, xmin, xmax, ymin, ymax, steps)
 
+    def colormap(self, name):
+        if name == "rainbow":
+            return self.gateway_client.jvm.org.jzy3d.colors.colormaps.ColorMapRainbow()
+        elif name == "hot":
+            return self.gateway_client.jvm.org.jzy3d.colors.colormaps.ColorMapHotCold()
+        elif name == "grayscale":
+            return self.gateway_client.jvm.org.jzy3d.colors.colormaps.ColorMapGrayscale()
+        elif name == "rgb":
+            return self.gateway_client.jvm.org.jzy3d.colors.colormaps.ColorMapRBG()
+        else:
+            return None
 
     def gateway_start(self, pzyJar = DEFAULT_JAR, showJavaOut = False):
         import subprocess as sub
