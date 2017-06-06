@@ -10,6 +10,7 @@ import org.jzy3d.colors.ColorMapper;
 import org.jzy3d.colors.colormaps.ColorMapRainbow;
 import org.jzy3d.maths.Coord3ds;
 import org.jzy3d.maths.Range;
+import org.jzy3d.maths.TicToc;
 import org.jzy3d.plot3d.builder.Builder;
 import org.jzy3d.plot3d.builder.concrete.OrthonormalGrid;
 import org.jzy3d.plot3d.primitives.Scatter;
@@ -31,7 +32,7 @@ public class Pyzy3d {
     public static void main(String[] args) {
         GatewayServer gatewayServer = new GatewayServer(new Pyzy3d());
         gatewayServer.start();
-        System.out.println("Pzy3d Gateway Server Started");
+        System.out.println("Pyzy3d Gateway Server Started");
     }
 
     public Pyzy3d(){
@@ -93,7 +94,15 @@ public class Pyzy3d {
     /** Create the object to represent the function over the given range.
      */
     public Shape newSurface(PyFunc3d pyFunction, float xmin, float xmax, float ymin, float ymax, int steps){
-        PyMapper mapper = new PyMapper(pyFunction);
+        if(pyFunction==null)
+            return null;
+        
+        TicToc t = new TicToc();
+        t.tic();
+        double test = pyFunction.f(1, 2);
+        t.tocShow("TESTED pyFunction.f(1, 2)=" + test);
+        
+        final PyMapper mapper = new PyMapper(pyFunction);
         final Shape surface = Builder.buildOrthonormal(new OrthonormalGrid(new Range(xmin, xmax), steps, new Range(ymin, ymax), steps), mapper);
         surface.setColorMapper(new ColorMapper(new ColorMapRainbow(), surface.getBounds().getZmin(), surface.getBounds().getZmax(), new Color(1, 1, 1, .5f)));
         surface.setFaceDisplayed(true);

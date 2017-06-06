@@ -145,3 +145,13 @@ Now deploy to test
 ```
 twine upload dist/* -r testpypi
 ```
+
+
+
+# Help
+
+* Kill a running instance of Py4j JavaGateway
+
+```
+lsof -n -i4TCP:25334 | grep LISTEN
+```

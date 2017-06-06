@@ -24,7 +24,7 @@ class Pyzy3d(object):
         # Start gateway
         if startGateway:#self.gateway_client.is_connected is False:#startGateway:
             self.gateway_process = self.gateway_start(pzyJar)
-            sleepTime = 5
+            sleepTime = 4
             time.sleep(sleepTime)
 
         # Connect gateway
@@ -45,7 +45,7 @@ class Pyzy3d(object):
     def new_scatter(self, coords):
         return self.gateway_client.entry_point.newScatter(coords)
 
-    def new_surface(self, mapper, xmin=-1, xmax=+1, ymin=-1, ymax=+1, steps=100):
+    def new_surface(self, mapper, xmin=-1.0, xmax=+1.0, ymin=-1.0, ymax=+1.0, steps=100):
         return self.gateway_client.entry_point.newSurface(mapper, xmin, xmax, ymin, ymax, steps)
 
 
@@ -68,6 +68,7 @@ class Pyzy3d(object):
 
     def gateway_connect(self):
         print("Joining Pyzy3d gateway ...")
-        gateway = JavaGateway()
+        gateway = JavaGateway(start_callback_server=True)
+        gateway.restart_callback_server()
         print("Pyzy3d gateway joined")
         return gateway
