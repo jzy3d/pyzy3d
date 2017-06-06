@@ -17,7 +17,7 @@ if autoStart:
 
     if showJavaOut:
         output, errors = p.communicate()
-        print output
+        print(output)
     else:
         import time
         time.sleep(sleepTime)
