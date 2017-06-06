@@ -109,7 +109,6 @@ public class Pyzy3d {
         surface.setWireframeDisplayed(false);
         return surface;
     }
-
     
     /**
      * Print coordinates in console for debugging

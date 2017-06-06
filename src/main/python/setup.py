@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='pyzy3d',
-      version='1.0.1',
+      version='1.0.1.rc2',
       description='3d charts for Python',
       url='https://github.com/jzy3d/pyzy3d',
       author='Martin Pernollet',

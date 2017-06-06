@@ -49,14 +49,62 @@ class Pyzy3d(object):
         return self.gateway_client.entry_point.getOrCreateChart(id)
 
     '''
-    Instanciate a Java Coord3ds that can be populated from Python.
+    Instanciate a Java Coord3ds that can be edited from Python.
     '''
-    def new_coords(self, size):
+    def new_coords(self):
         return self.gateway_client.jvm.org.jzy3d.maths.Coord3ds(size)
 
+    '''
+    Instanciate a Java Coord3d that can be edited from Python.
+    '''
+    def new_coord(self):
+        return self.gateway_client.jvm.org.jzy3d.maths.Coord3d()
+
+    '''
+    Instanciate a Java Color that can be edited from Python.
+    '''
+    def new_color(self):
+        return self.gateway_client.jvm.org.jzy3d.colors.Color()
+
+    '''
+    Instanciate a Java Point that can be edited from Python.
+    '''
+    def new_point(self):
+        return self.gateway_client.jvm.org.jzy3d.plot3d.primitives.Point()
+
+    '''
+    Instanciate a Java LineStrip that can be edited from Python.
+    '''
+    def new_linestrip(self):
+        return self.gateway_client.jvm.org.jzy3d.plot3d.primitives.LineStrip()
+
+    '''
+    Instanciate a Java Polygon that can be edited from Python.
+    '''
+    def new_polygon(self):
+        return self.gateway_client.jvm.org.jzy3d.plot3d.primitives.Polygon()
+
+    '''
+    Instanciate a Java Quad that can be edited from Python.
+    '''
+    def new_quad(self):
+        return self.gateway_client.jvm.org.jzy3d.plot3d.primitives.Quad()
+
+    '''
+    Instanciate a Java TesselatedPolygon that can be edited from Python.
+    '''
+    def new_polygon_tesselated(self, pointArray):
+        return self.gateway_client.jvm.org.jzy3d.plot3d.primitives.TesselatedPolygon(pointArray)
+
+    '''
+    Instanciate a Java Scatter that can be edited from Python.
+    '''
     def new_scatter(self, coords):
         return self.gateway_client.entry_point.newScatter(coords)
 
+    '''
+    Instanciate a Java Shape that can be edited from Python.
+    '''
     def new_surface(self, mapper, xmin=-1.0, xmax=+1.0, ymin=-1.0, ymax=+1.0, steps=100):
         return self.gateway_client.entry_point.newSurface(mapper, xmin, xmax, ymin, ymax, steps)
 
