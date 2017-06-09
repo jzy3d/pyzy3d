@@ -1,5 +1,5 @@
-from pyzy3d import Pyzy3d
-from generator import Generator
+from pyzy3d.pyzy3d import Pyzy3d
+from pyzy3d.generator import Generator
 
 # A Pyzy instance
 pz = Pyzy3d()#False, 'target/pyzy3d-1.0.1-SNAPSHOT.jar')

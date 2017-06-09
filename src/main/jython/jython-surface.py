@@ -36,5 +36,5 @@ surface.setWireframeDisplayed(False)
 chart = AWTChartComponentFactory.chart(Quality.Advanced, "awt")
 chart.getScene().getGraph().add(surface)
 chart.addMouseCameraController();
-chart.open("Pzy3d - Jython - Surface", 800, 600)
+chart.open("Pyzy3d - Jython - Surface", 800, 600)
 chart.render()
