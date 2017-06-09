@@ -2,9 +2,9 @@
 
 Build [Jzy3d](http://www.jzy3d.org) charts for Python.
 
-Jzy3d is a java library, hence calling it from Python might be done by several manners :
+Jzy3d is a java library that can be invoked multiple ways :
 * Py4j binding : python initialize a Java Virtual Machine acting like a server. Python scripts then exchange informations with this server. See ```src/main/python/py4j-*.py```
-* Jython : your python program is interpreted inside a JVM. Your program can use Java objects. See ```src/main/jython/jython-*.py```
+* Jython : your python program is interpreted inside a JVM. It can use Java objects. See ```src/main/jython/jython-*.py```
 
 ## Using Py4j
 
@@ -102,7 +102,7 @@ class Func3d(object):
         implements = ['org.pyzy3d.PyFunc3d']
 ```
 
-Last line state that Func3d implements the <a href="https://github.com/jzy3d/pyzy3d/blob/master/src/main/java/org/pyzy3d/PyFunc3d.java">PyFunc3d java interface</a>. Overriding Func3d.f(x,y) let the JVM ask to python which Z value should be generated for a given {X,Y} pair.
+Last line states that Func3d implements the <a href="https://github.com/jzy3d/pyzy3d/blob/master/src/main/java/org/pyzy3d/PyFunc3d.java">PyFunc3d java interface</a>. Overriding Func3d.f(x,y) let the JVM ask to python which Z value should be generated for a given {X,Y} pair.
 
 #### TODO
 
@@ -200,8 +200,8 @@ mvn clean package
 cp target/pzy3d-api-1.0.1-SNAPSHOT.jar bin/
 ```
 
-#### Using Pzy3d with Jython
+#### Using Pyzy3d with Jython
 Jython requires path to be defined as follow ```jython -Dpython.path=bin/pzy3d-api-1.0.1-SNAPSHOT.jar src/main/jython/jython-surface.py```
 
-#### Using Pzy3d with Py4j
+#### Using Pyzy3d with Py4j
 Py4j requires gateway to be started with ```java -jar bin/pzy3d-api-1.0.1-SNAPSHOT.jar```. Then run a script like ```python src/main/python/py4j-scatter.py```
