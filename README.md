@@ -118,7 +118,14 @@ Last line state that Func3d implements the <a href="https://github.com/jzy3d/pyz
 lsof -n -i4TCP:25334 | grep LISTEN
 ```
 
-### Packaging the library
+Will show callback server process that <i>might</i> remain awake if Pyzy3d.shutdown() did not execute. Read process id and
+
+```
+kill [pid]
+```
+
+
+### Packaging the Python library
 
 #### Help
 * https://python-packaging.readthedocs.io/en/latest/
@@ -131,6 +138,8 @@ lsof -n -i4TCP:25334 | grep LISTEN
 mvn clean package
 cp target/pyzy3d-1.0.1-SNAPSHOT.jar src/main/python/pyzy3d/bin/
 ```
+
+The java gateway sources are <a href="https://github.com/jzy3d/pyzy3d/blob/master/src/main/java/org/pyzy3d/Pyzy3d.java">here</a>
 
 #### Build python package
 ```
