@@ -34,7 +34,7 @@ class Pyzy3d(object):
             time.sleep(sleepTime)
 
         # Connect gateway
-        self.gateway_client = self.gateway_connect()
+        self.gateway_client = self.gateway_connect(startGateway)
 
     def shutdown(self):
         self.gateway_client.shutdown_callback_server()
@@ -132,9 +132,9 @@ class Pyzy3d(object):
             print(output)
         return pid
 
-    def gateway_connect(self):
+    def gateway_connect(self, callback_server=True):
         print("Joining Pyzy3d gateway ...")
-        gateway = JavaGateway(start_callback_server=True)
+        gateway = JavaGateway(start_callback_server=callback_server)
         gateway.restart_callback_server()
         print("Pyzy3d gateway joined")
         return gateway

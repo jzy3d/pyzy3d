@@ -1,5 +1,5 @@
 from pyzy3d.pyzy3d import Pyzy3d
-import pyzy3d
+import pyzy3d.func3d as f3d
 import time
 import numpy as np
 
@@ -7,7 +7,7 @@ import numpy as np
 pz = Pyzy3d(startGateway=True, pzyJar="/Users/martin/dev/jzy3d/public/pyzy3d/target/pyzy3d-1.0.1-SNAPSHOT.jar")
 
 
-func = Mapper(monitor=True)
+func = f3d.Func3d(monitor=True)
 surface = pz.new_surface(func, -2 * np.pi, 2 * np.pi, -2 * np.pi, 2 * np.pi, 50)
 
 # Chart

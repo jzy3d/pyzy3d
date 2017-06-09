@@ -44,7 +44,11 @@ chart.open("Pyzy3d - Scatter", 800, 600)
 pz.shutdown()
 ```
 
-Will output
+Will prompt
+
+<img src="doc/example_scatter.png">
+
+Console should show it started Py4j Gateway and connected successfully as follow:
 
 ```
 Will start Pyzy3d Gateway : /Users/martin/Dev/jzy3d/public/pyzy3d/src/main/python/pyzy3d/bin/pyzy3d-1.0.1-SNAPSHOT.jar
@@ -64,9 +68,47 @@ and then show a scatter plot:
 ### Run example plots
 
 ```
-./run-pyzy3d-scatter.sh
-./run-pyzy3d-surface.sh
+cd src/main/python # go to source folder if you are developing pyzy3d
+
+python examples/example_scatter.py
+python examples/example_surface.py
+
 ```
+
+Surface example is interesting since it shows a way to define a <i>function</i> to render by the JVM gateway.
+
+
+It will produce the below chart:
+
+<img src="doc/example_surface.png"/>
+
+Surface example is based on pyzy3d default ```Func3d```
+```python
+from numpy import *
+
+class Func3d(object):
+    def __init__(self, monitor=False):
+        self.k = 0
+        self.doMonitor = monitor
+
+    def f(self, x, y):
+        self.monitor()
+        return cos(x) + sin(y)
+
+    def monitor(self):
+        ...
+
+    class Java:
+        implements = ['org.pyzy3d.PyFunc3d']
+```
+
+Last line state that Func3d implements the <a href="https://github.com/jzy3d/pyzy3d/blob/master/src/main/java/org/pyzy3d/PyFunc3d.java">PyFunc3d java interface</a>. Overriding Func3d.f(x,y) let the JVM ask to python which Z value should be generated for a given {X,Y} pair.
+
+#### TODO
+
+* shutdown callback server when caller as finished processing
+* detect if gateway is up or no to guess if it should be started
+* flag to state if it should remain up + how to reconnect to callback server
 
 
 ### Help
@@ -76,7 +118,7 @@ and then show a scatter plot:
 lsof -n -i4TCP:25334 | grep LISTEN
 ```
 
-### Build Py4J binding
+### Packaging the library
 
 #### Help
 * https://python-packaging.readthedocs.io/en/latest/
@@ -84,11 +126,14 @@ lsof -n -i4TCP:25334 | grep LISTEN
 * https://docs.python.org/3/distutils/setupscript.html#installing-additional-files
 * https://blog.jetbrains.com/pycharm/2017/05/how-to-publish-your-package-on-pypi/
 
-#### Build gateway and python package distribution
+#### Build java gateway
 ```
 mvn clean package
 cp target/pyzy3d-1.0.1-SNAPSHOT.jar src/main/python/pyzy3d/bin/
+```
 
+#### Build python package
+```
 cd src/main/python
 python setup.py sdist
 ```
@@ -105,6 +150,8 @@ otherwise
 pip install .
 ```
 
+#### Deploy python package
+
 Now register for test deployement
 ```
 twine register dist/pyzy3d-1.0.1.tar.gz -r testpypi
@@ -116,11 +163,6 @@ Now deploy to test
 twine upload dist/* -r testpypi
 ```
 
-#### TODO
-
-* shutdown callback server when caller as finished processing
-* detect if gateway is up or no to guess if it should be started
-* flag to state if it should remain up + how to reconnect to callback server
 
 
 
