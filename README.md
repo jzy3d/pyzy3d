@@ -141,6 +141,14 @@ cp target/pyzy3d-1.0.1-SNAPSHOT.jar src/main/python/pyzy3d/bin/
 
 The java gateway sources are <a href="https://github.com/jzy3d/pyzy3d/blob/master/src/main/java/org/pyzy3d/Pyzy3d.java">here</a>
 
+
+Verify you can run the python tests
+
+```
+cd src/main/python
+pytest -svv
+```
+
 #### Build python package
 ```
 cd src/main/python
