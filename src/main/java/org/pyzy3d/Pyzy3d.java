@@ -2,9 +2,9 @@ package org.pyzy3d;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jzy3d.bridge.IFrame;
 import org.jzy3d.chart.Chart;
 import org.jzy3d.chart.factories.AWTChartComponentFactory;
+import org.jzy3d.chart.factories.IFrame;
 import org.jzy3d.colors.Color;
 import org.jzy3d.colors.ColorMapper;
 import org.jzy3d.colors.colormaps.ColorMapRainbow;
