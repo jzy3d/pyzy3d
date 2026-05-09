@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jzy3d.chart.Chart;
-import org.jzy3d.chart.factories.AWTChartComponentFactory;
+import org.jzy3d.chart.factories.AWTChartFactory;
 import org.jzy3d.chart.factories.IFrame;
 import org.jzy3d.colors.Color;
 import org.jzy3d.colors.ColorMapper;
@@ -11,10 +11,11 @@ import org.jzy3d.colors.colormaps.ColorMapRainbow;
 import org.jzy3d.maths.Coord3ds;
 import org.jzy3d.maths.Range;
 import org.jzy3d.maths.TicToc;
-import org.jzy3d.plot3d.builder.Builder;
+import org.jzy3d.plot3d.builder.SurfaceBuilder;
 import org.jzy3d.plot3d.builder.concrete.OrthonormalGrid;
 import org.jzy3d.plot3d.primitives.Scatter;
 import org.jzy3d.plot3d.primitives.Shape;
+import org.jzy3d.plot3d.primitives.Drawable;
 import org.jzy3d.plot3d.rendering.canvas.Quality;
 
 import py4j.GatewayServer;
@@ -25,7 +26,7 @@ import py4j.GatewayServer;
  * @author Martin Pernollet
  */
 public class Pyzy3d {
-    protected Quality quality = Quality.Advanced;
+    protected Quality quality = Quality.Advanced();
     protected Chart chart;
     protected Map<Integer,Chart> charts = new HashMap<Integer,Chart>();
 
@@ -36,7 +37,7 @@ public class Pyzy3d {
     }
 
     public Pyzy3d(){
-       chart = AWTChartComponentFactory.chart(quality, "newt");
+       chart = new AWTChartFactory().newChart(quality);
        chart.addMouseCameraController();
     }
     
@@ -49,7 +50,7 @@ public class Pyzy3d {
     public Chart getOrCreateChart(int id) {
         Chart chart = charts.get(id);
         if(chart==null){
-            chart = newChart(Quality.Advanced);
+            chart = newChart(Quality.Advanced());
             charts.put(id, chart);
         }
         return chart;
@@ -62,7 +63,9 @@ public class Pyzy3d {
     }
     
     public void clear(){
-        chart.clear();
+        for (Drawable d : new java.util.ArrayList<>(chart.getScene().getGraph().getAll())) {
+            chart.getScene().getGraph().remove(d);
+        }
     }
     
     /* PRIMITIVES */
@@ -86,7 +89,7 @@ public class Pyzy3d {
      * @return
      */
     public Chart newChart(Quality quality){
-        Chart chart = AWTChartComponentFactory.chart(quality, "newt");
+        Chart chart = new AWTChartFactory().newChart(quality);
         chart.addMouseCameraController();
         return chart;
     }
@@ -103,7 +106,7 @@ public class Pyzy3d {
         t.tocShow("TESTED pyFunction.f(1, 2)=" + test);
         
         final PyMapper mapper = new PyMapper(pyFunction);
-        final Shape surface = Builder.buildOrthonormal(new OrthonormalGrid(new Range(xmin, xmax), steps, new Range(ymin, ymax), steps), mapper);
+        final Shape surface = new SurfaceBuilder().orthonormal(new OrthonormalGrid(new Range(xmin, xmax), steps, new Range(ymin, ymax), steps), mapper);
         surface.setColorMapper(new ColorMapper(new ColorMapRainbow(), surface.getBounds().getZmin(), surface.getBounds().getZmax(), new Color(1, 1, 1, .5f)));
         surface.setFaceDisplayed(true);
         surface.setWireframeDisplayed(false);
